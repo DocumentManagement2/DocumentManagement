@@ -1,0 +1,5 @@
+D:\VSProjects\DocumentManagement\DocumentManagementCommon\bin\Debug\DocumentManagementCommon.dll
+D:\VSProjects\DocumentManagement\DocumentManagementCommon\bin\Debug\DocumentManagementCommon.pdb
+D:\VSProjects\DocumentManagement\DocumentManagementCommon\obj\Debug\DocumentManagementCommon.csprojResolveAssemblyReference.cache
+D:\VSProjects\DocumentManagement\DocumentManagementCommon\obj\Debug\DocumentManagementCommon.dll
+D:\VSProjects\DocumentManagement\DocumentManagementCommon\obj\Debug\DocumentManagementCommon.pdb

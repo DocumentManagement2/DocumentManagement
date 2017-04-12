@@ -1,0 +1,15 @@
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Emulator config file set to D:\VSProjects\DocumentManagement\DocumentManagement\csx\Debug\roles\DoucmentManagementWeb\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] DiagnosticsStoreRootPath set to: C:\Users\neilwang\AppData\Local\dftmp\Resources\5a7aaa6e-2460-4f16-8a41-2bef79c5e654
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Loading config file: D:\VSProjects\DocumentManagement\DocumentManagement\csx\Debug\roles\DoucmentManagementWeb\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Config file to read: D:\VSProjects\DocumentManagement\DocumentManagement\csx\Debug\roles\DoucmentManagementWeb\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Emulator config file set to D:\VSProjects\DocumentManagement\DocumentManagement\csx\Debug\roles\DoucmentManagementWeb\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:35 AM] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:36 AM] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [4/12/2017 2:18:36 AM] Resetting DiagnosticPlugin
