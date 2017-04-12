@@ -12,6 +12,7 @@
     <AssemblyName>DocumentManagement</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>DocumentManagement</Name>
+    <UseWebProjectPorts>False</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +46,14 @@
       <RoleName>documentManagementAdminWeb</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentWorkerRoleWithSBQueue\DocumentWorkerRoleWithSBQueue.csproj">
+      <Name>DocumentWorkerRoleWithSBQueue</Name>
+      <Project>{214357d1-0a19-43a9-acbd-91894467a3e7}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>DocumentWorkerRoleWithSBQueue</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\DoucmentManagementWeb\DoucmentManagementWeb.csproj">
       <Name>DoucmentManagementWeb</Name>
       <Project>{adc00d15-67c3-4c72-978d-98a606bebf64}</Project>
@@ -56,10 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="documentManagementAdminWebContent\" />
+    <Folder Include="DocumentWorkerRoleWithSBQueueContent\" />
     <Folder Include="DoucmentManagementWebContent\" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="documentManagementAdminWebContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="DocumentWorkerRoleWithSBQueueContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="DoucmentManagementWebContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
