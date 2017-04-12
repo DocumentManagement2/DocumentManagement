@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "documentManagementAdminWeb"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentManagementCommon", "DocumentManagementCommon\DocumentManagementCommon.csproj", "{12DC4C00-D716-46EB-BD39-85AE52C909EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentWorkerRoleWithSBQueue", "DocumentWorkerRoleWithSBQueue\DocumentWorkerRoleWithSBQueue.csproj", "{214357D1-0A19-43A9-ACBD-91894467A3E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{12DC4C00-D716-46EB-BD39-85AE52C909EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DC4C00-D716-46EB-BD39-85AE52C909EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12DC4C00-D716-46EB-BD39-85AE52C909EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{214357D1-0A19-43A9-ACBD-91894467A3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{214357D1-0A19-43A9-ACBD-91894467A3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{214357D1-0A19-43A9-ACBD-91894467A3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{214357D1-0A19-43A9-ACBD-91894467A3E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

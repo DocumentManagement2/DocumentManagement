@@ -12,4 +12,12 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
+  <Role name="DocumentWorkerRoleWithSBQueue">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://demo-ns.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yxb/leN2W6kcp8vcqJEVz0imVPdrL9lGCAIWkQAwUI0=" />
+      <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=firstdemostorage;AccountKey=XoibmTDlSDWUR8iiyzkGuEUdn1DWHmQYopSSyqlaMa7Jnq+02McmuHRXsxM17F8N6ZxxGWknALK7nUQ1GFspug==;EndpointSuffix=core.chinacloudapi.cn" />
+    </ConfigurationSettings>
+  </Role>
 </ServiceConfiguration>
