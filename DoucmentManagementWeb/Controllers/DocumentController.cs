@@ -34,10 +34,19 @@ namespace DoucmentManagementWeb.Controllers
             var tempBlobUri = documentService.SaveDocumentFile(importFile);
             if (!string.IsNullOrWhiteSpace(tempBlobUri))
             {
+                document.Id = Guid.NewGuid().ToString();
                 document.TempDocumentUrl = tempBlobUri;
+                document.Status = DocumentStatus.Pending;
                 await documentService.CreateDocumentIfNotExists(document).ConfigureAwait(false);
                 await documentService.SendQueueMessage(new DocumentBlobInfo() { BlobUri = new Uri(tempBlobUri), DocumentId = document.Id });
             }
+
+            return RedirectToAction("DocumentList");
+        }
+
+        public async Task<ActionResult> DeleteDocument(string documentId)
+        {
+            await documentService.DeleteDocument(documentId).ConfigureAwait(false);
 
             return RedirectToAction("DocumentList");
         }

@@ -5,16 +5,36 @@
 </p>
 <table class="table">
     <tr>
-        <th></th>
+        <th>
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            KeyWords
+        </th>
+        <th>
+            Action
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.KeyWords
+            </td>
+            <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "DeleteDocument", new { documentId = item.Id })
             </td>
         </tr>
     }

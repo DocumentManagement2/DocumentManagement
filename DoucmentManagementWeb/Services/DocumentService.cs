@@ -18,15 +18,6 @@ namespace DoucmentManagementWeb.Services
 {
     public class DocumentService
     {
-        private const string DatabaseName = "demo-documentdb";
-        private const string CollectionName = "demo_documentcollection";
-        private const string TempBlobContainerName = "demo-temp";
-        private const string ImageBlobContainerName = "demo-images";
-        private const string ExcelBlobContainerName = "demo-excels";
-        private const string PdfBlobContainerName = "demo-pdfs";
-        private const string StorageQueueContainerName = "demo-queue";
-        private const string StorageAccountConnectionName = "Microsoft.WindowsAzure.AzureStorage.ConnectionString";
-
         private CloudBlobContainer tempBlobContainer;
         private CloudBlobContainer imagesBlobContainer;
         private CloudBlobContainer pdfsBlobContainer;
@@ -44,23 +35,23 @@ namespace DoucmentManagementWeb.Services
 
         private void InitializeDocumentDB()
         {
-            var documentDBUri = CloudConfigurationManager.GetSetting("Microsoft.WindowsAzure.DocumentDB.Uri");
-            var documentDBPrivateKey = CloudConfigurationManager.GetSetting("Microsoft.WindowsAzure.DocumentDB.PrivateKey");
+            var documentDBUri = CloudConfigurationManager.GetSetting(AzureRelatedNames.DocumentDBUri);
+            var documentDBPrivateKey = CloudConfigurationManager.GetSetting(AzureRelatedNames.DocumentDBPrivateKey);
             documentClient = new DocumentClient(new Uri(documentDBUri), documentDBPrivateKey);
         }
 
         private void InitializeStorages()
         {
-            var storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(StorageAccountConnectionName));
+            var storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(AzureRelatedNames.StorageAccountConnectionName));
 
             var blobClient = storageAccount.CreateCloudBlobClient();
-            tempBlobContainer = blobClient.GetContainerReference(TempBlobContainerName);
-            imagesBlobContainer = blobClient.GetContainerReference(ImageBlobContainerName);
-            excelsBlobContainer = blobClient.GetContainerReference(ExcelBlobContainerName);
-            pdfsBlobContainer = blobClient.GetContainerReference(PdfBlobContainerName);
+            tempBlobContainer = blobClient.GetContainerReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.TempBlobContainerName));
+            imagesBlobContainer = blobClient.GetContainerReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.ImageBlobContainerName));
+            excelsBlobContainer = blobClient.GetContainerReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.ExcelBlobContainerName));
+            pdfsBlobContainer = blobClient.GetContainerReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.PdfBlobContainerName));
 
             var queueClient = storageAccount.CreateCloudQueueClient();
-            documentQueue = queueClient.GetQueueReference(StorageQueueContainerName);
+            documentQueue = queueClient.GetQueueReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.StorageQueueContainerName));
         }
 
         public static DocumentService Instance
@@ -73,11 +64,29 @@ namespace DoucmentManagementWeb.Services
 
         public IEnumerable<DocumentInfo> GetDocuments()
         {
-            FeedOptions queryOptions = new FeedOptions { MaxItemCount = -1 };
+            var queryOptions = new FeedOptions { MaxItemCount = -1 };
+            var sqlQuery = new SqlQuerySpec();
+            sqlQuery.QueryText = "select * from documents d where d.Status=@status";
+            sqlQuery.Parameters.Add(new SqlParameter("@status", (int)DocumentStatus.Approved));
 
             return documentClient.CreateDocumentQuery<DocumentInfo>(
-                    UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName), queryOptions);
+                    UriFactory.CreateDocumentCollectionUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                    CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName)), sqlQuery, queryOptions);
 
+        }
+
+        public DocumentInfo GetDocumentById(string documentId)
+        {
+            var queryOptions = new FeedOptions { MaxItemCount = -1 };
+            var sqlQuery = new SqlQuerySpec();
+            sqlQuery.QueryText = "select * from documents ds where ds.id=@id";
+            sqlQuery.Parameters.Add(new SqlParameter("@id", documentId));
+
+            var documents = documentClient.CreateDocumentQuery<DocumentInfo>(
+                    UriFactory.CreateDocumentCollectionUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                    CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName)), sqlQuery, queryOptions);
+
+            return documents.AsEnumerable().FirstOrDefault();
         }
 
         public string SaveDocumentFile(HttpPostedFileBase importFile)
@@ -101,13 +110,15 @@ namespace DoucmentManagementWeb.Services
         {
             try
             {
-                await documentClient.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseName, CollectionName, document.Id));
+                await documentClient.ReadDocumentAsync(UriFactory.CreateDocumentUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                    CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName), document.Id));
             }
             catch (DocumentClientException de)
             {
                 if (de.StatusCode == HttpStatusCode.NotFound)
                 {
-                    await documentClient.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName), document);
+                    await documentClient.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                        CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName)), document);
                 }
                 else
                 {
@@ -120,6 +131,22 @@ namespace DoucmentManagementWeb.Services
         {
             var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(documentBlobInfo));
             await documentQueue.AddMessageAsync(queueMessage).ConfigureAwait(false);
+        }
+
+        public async Task DeleteDocument(string documentId)
+        {
+            var document = GetDocumentById(documentId);
+            if (document != null)
+            {
+                if (document.Status == DocumentStatus.Pending && !string.IsNullOrWhiteSpace(document.TempDocumentUrl))
+                {
+                    var blockBlob = tempBlobContainer.ServiceClient.GetBlobReferenceFromServer(new Uri(document.TempDocumentUrl));
+                    blockBlob.Delete();
+
+                    await documentClient.DeleteDocumentAsync(UriFactory.CreateDocumentUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                        CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName), documentId));
+                }
+            }
         }
     }
 }

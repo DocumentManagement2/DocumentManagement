@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DocumentManagementCommon;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -17,15 +15,6 @@ namespace DoucmentManagementWeb
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private const string DatabaseName = "demo-documentdb";
-        private const string CollectionName = "demo_documentcollection";
-        private const string TempBlobContainerName = "demo-temp";
-        private const string ImageBlobContainerName = "demo-images";
-        private const string ExcelBlobContainerName = "demo-excels";
-        private const string PdfBlobContainerName = "demo-pdfs";
-        private const string StorageQueueContainerName = "demo-queue";
-        private const string StorageAccountConnectionName = "Microsoft.WindowsAzure.AzureStorage.ConnectionString";
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -41,8 +30,8 @@ namespace DoucmentManagementWeb
         {
             try
             {
-                var documentDBUri = CloudConfigurationManager.GetSetting("Microsoft.WindowsAzure.DocumentDB.Uri");
-                var documentDBPrivateKey = CloudConfigurationManager.GetSetting("Microsoft.WindowsAzure.DocumentDB.PrivateKey");
+                var documentDBUri = CloudConfigurationManager.GetSetting(AzureRelatedNames.DocumentDBUri);
+                var documentDBPrivateKey = CloudConfigurationManager.GetSetting(AzureRelatedNames.DocumentDBPrivateKey);
                 var documentClient = new DocumentClient(new Uri(documentDBUri), documentDBPrivateKey);
 
                 await CreateDataBaseIfNotExists(documentClient).ConfigureAwait(false);
@@ -56,15 +45,15 @@ namespace DoucmentManagementWeb
 
         private void InitializeStorage()
         {
-            var storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(StorageAccountConnectionName));
+            var storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(AzureRelatedNames.StorageAccountConnectionName));
             var blobClient = storageAccount.CreateCloudBlobClient();
-            CreateBlobContainerIfNotExists(blobClient, TempBlobContainerName);
-            CreateBlobContainerIfNotExists(blobClient, ImageBlobContainerName);
-            CreateBlobContainerIfNotExists(blobClient, ExcelBlobContainerName);
-            CreateBlobContainerIfNotExists(blobClient, PdfBlobContainerName);
+            CreateBlobContainerIfNotExists(blobClient, CloudConfigurationManager.GetSetting(AzureRelatedNames.TempBlobContainerName));
+            CreateBlobContainerIfNotExists(blobClient, CloudConfigurationManager.GetSetting(AzureRelatedNames.ImageBlobContainerName));
+            CreateBlobContainerIfNotExists(blobClient, CloudConfigurationManager.GetSetting(AzureRelatedNames.ExcelBlobContainerName));
+            CreateBlobContainerIfNotExists(blobClient, CloudConfigurationManager.GetSetting(AzureRelatedNames.PdfBlobContainerName));
 
             var queueClient = storageAccount.CreateCloudQueueClient();
-            var blobnameQueue = queueClient.GetQueueReference(StorageQueueContainerName);
+            var blobnameQueue = queueClient.GetQueueReference(CloudConfigurationManager.GetSetting(AzureRelatedNames.StorageQueueContainerName));
             blobnameQueue.CreateIfNotExists();
 
         }
@@ -73,13 +62,13 @@ namespace DoucmentManagementWeb
         {
             try
             {
-                await documentClient.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(DatabaseName));
+                await documentClient.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName)));
             }
             catch (DocumentClientException de)
             {
                 if (de.StatusCode == HttpStatusCode.NotFound)
                 {
-                    await documentClient.CreateDatabaseAsync(new Database { Id = DatabaseName });
+                    await documentClient.CreateDatabaseAsync(new Database { Id = CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName) });
                 }
                 else
                 {
@@ -92,19 +81,20 @@ namespace DoucmentManagementWeb
         {
             try
             {
-                await documentClient.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName));
+                await documentClient.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName),
+                    CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName)));
             }
             catch (DocumentClientException de)
             {
                 if (de.StatusCode == HttpStatusCode.NotFound)
                 {
                     DocumentCollection collectionInfo = new DocumentCollection();
-                    collectionInfo.Id = CollectionName;
+                    collectionInfo.Id = CloudConfigurationManager.GetSetting(AzureRelatedNames.CollectionName);
 
                     collectionInfo.IndexingPolicy = new IndexingPolicy(new RangeIndex(DataType.String) { Precision = -1 });
 
                     await documentClient.CreateDocumentCollectionAsync(
-                        UriFactory.CreateDatabaseUri(DatabaseName),
+                        UriFactory.CreateDatabaseUri(CloudConfigurationManager.GetSetting(AzureRelatedNames.DatabaseName)),
                         collectionInfo,
                         new RequestOptions { OfferThroughput = 400 });
                 }

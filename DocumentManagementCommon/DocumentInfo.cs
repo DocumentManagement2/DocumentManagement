@@ -16,6 +16,7 @@ namespace DocumentManagementCommon
         public string KeyWords { get; set; }
         public string DocumentUrl { get; set; }
         public string TempDocumentUrl { get; set; }
+        public DocumentStatus Status { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

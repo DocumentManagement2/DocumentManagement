@@ -10,9 +10,16 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Microsoft.WindowsAzure.DocumentDB.Uri" />
-      <Setting name="Microsoft.WindowsAzure.DocumentDB.PrivateKey" />
-      <Setting name="Microsoft.WindowsAzure.AzureStorage.ConnectionString" />
+      <Setting name="DocumentDB.Uri" />
+      <Setting name="DocumentDB.PrivateKey" />
+      <Setting name="Storage.ConnectionString" />
+      <Setting name="DocumentDB.DatabaseName" />
+      <Setting name="DocumentDB.CollectionName" />
+      <Setting name="Storage.TempBlobContainerName" />
+      <Setting name="Storage.ImageBlobContainerName" />
+      <Setting name="Storage.ExcelBlobContainerName" />
+      <Setting name="Storage.PdfBlobContainerName" />
+      <Setting name="Storage.StorageQueueContainerName" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="62347" />
@@ -28,6 +35,16 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DocumentDB.Uri" />
+      <Setting name="DocumentDB.PrivateKey" />
+      <Setting name="Storage.ConnectionString" />
+      <Setting name="DocumentDB.DatabaseName" />
+      <Setting name="DocumentDB.CollectionName" />
+      <Setting name="Storage.TempBlobContainerName" />
+      <Setting name="Storage.ImageBlobContainerName" />
+      <Setting name="Storage.ExcelBlobContainerName" />
+      <Setting name="Storage.PdfBlobContainerName" />
+      <Setting name="Storage.StorageQueueContainerName" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="8080" />
@@ -37,7 +54,16 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
-      <Setting name="StorageConnectionString" />
+      <Setting name="DocumentDB.Uri" />
+      <Setting name="DocumentDB.PrivateKey" />
+      <Setting name="Storage.ConnectionString" />
+      <Setting name="DocumentDB.DatabaseName" />
+      <Setting name="DocumentDB.CollectionName" />
+      <Setting name="Storage.TempBlobContainerName" />
+      <Setting name="Storage.ImageBlobContainerName" />
+      <Setting name="Storage.ExcelBlobContainerName" />
+      <Setting name="Storage.PdfBlobContainerName" />
+      <Setting name="Storage.StorageQueueContainerName" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
