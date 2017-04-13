@@ -18,12 +18,12 @@ namespace DoucmentManagementWeb
     public class MvcApplication : System.Web.HttpApplication
     {
         private const string DatabaseName = "demo-documentdb";
-        private const string CollectionName = "Demo_DocumentCollection";
-        private const string TempBlobContainerName = "Demo_Temp";
-        private const string ImageBlobContainerName = "Demo_Images";
-        private const string ExcelBlobContainerName = "Demo_Excels";
-        private const string PdfBlobContainerName = "Demo_Pdfs";
-        private const string StorageQueueContainerName = "Demo_Queue";
+        private const string CollectionName = "demo_documentcollection";
+        private const string TempBlobContainerName = "demo-temp";
+        private const string ImageBlobContainerName = "demo-images";
+        private const string ExcelBlobContainerName = "demo-excels";
+        private const string PdfBlobContainerName = "demo-pdfs";
+        private const string StorageQueueContainerName = "demo-queue";
         private const string StorageAccountConnectionName = "Microsoft.WindowsAzure.AzureStorage.ConnectionString";
 
         protected void Application_Start()
@@ -117,14 +117,21 @@ namespace DoucmentManagementWeb
 
         private void CreateBlobContainerIfNotExists(CloudBlobClient blobClient, string name)
         {
-            var blobContainer = blobClient.GetContainerReference(name);
-            if (blobContainer.CreateIfNotExists())
+            try
             {
-                blobContainer.SetPermissions(
-                    new BlobContainerPermissions
-                    {
-                        PublicAccess = BlobContainerPublicAccessType.Blob
-                    });
+                var blobContainer = blobClient.GetContainerReference(name);
+                if (blobContainer.CreateIfNotExists())
+                {
+                    blobContainer.SetPermissions(
+                        new BlobContainerPermissions
+                        {
+                            PublicAccess = BlobContainerPublicAccessType.Blob
+                        });
+                }
+            }
+           catch(Exception ex)
+            {
+                throw ex;
             }
         }
     }

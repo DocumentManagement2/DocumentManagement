@@ -31,7 +31,7 @@ namespace DoucmentManagementWeb.Controllers
         [HttpPost]
         public async Task<ActionResult> AddDocument(DocumentInfo document, HttpPostedFileBase importFile)
         {
-            var tempBlobUri = await documentService.SaveDocumentFile(importFile).ConfigureAwait(false);
+            var tempBlobUri = documentService.SaveDocumentFile(importFile);
             if (!string.IsNullOrWhiteSpace(tempBlobUri))
             {
                 document.TempDocumentUrl = tempBlobUri;

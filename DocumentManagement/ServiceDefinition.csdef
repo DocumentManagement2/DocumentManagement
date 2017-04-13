@@ -10,12 +10,12 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Microsoft.WindowsAzure.DocumentDB.Uri"/>
-      <Setting name="Microsoft.WindowsAzure.DocumentDB.PrivateKey"/>
-      <Setting name="Microsoft.WindowsAzure.AzureStorage.ConnectionString"/>
+      <Setting name="Microsoft.WindowsAzure.DocumentDB.Uri" />
+      <Setting name="Microsoft.WindowsAzure.DocumentDB.PrivateKey" />
+      <Setting name="Microsoft.WindowsAzure.AzureStorage.ConnectionString" />
     </ConfigurationSettings>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="Endpoint1" protocol="http" port="62347" />
     </Endpoints>
   </WebRole>
   <WebRole name="documentManagementAdminWeb" vmsize="Small">
