@@ -12,13 +12,14 @@ using System.Net.Mail;
 using System.Text;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using DocumentManagementCommon;
 
 namespace DocumentWorkerRoleWithSBQueue
 {
     public class WorkerRole : RoleEntryPoint
     {
         // The name of your queue
-        const string QueueName = "demo-service-bus-queue";
+        const string QueueName = AzureRelatedNames.ServiceBusQueueName;
 
         // QueueClient is thread-safe. Recommended that you cache 
         // rather than recreating it on every request
@@ -56,7 +57,7 @@ namespace DocumentWorkerRoleWithSBQueue
             ServicePointManager.DefaultConnectionLimit = 12;
 
             // Create the queue if it does not exist already
-            string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+            string connectionString = CloudConfigurationManager.GetSetting(AzureRelatedNames.ServiceBusConnectionString);
             var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
             if (!namespaceManager.QueueExists(QueueName))
             {
@@ -80,7 +81,7 @@ namespace DocumentWorkerRoleWithSBQueue
         {
             string m = message.GetBody<string>();
 
-            string connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
+            string connectionString = CloudConfigurationManager.GetSetting(AzureRelatedNames.StorageAccountConnectionName);
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
 
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();

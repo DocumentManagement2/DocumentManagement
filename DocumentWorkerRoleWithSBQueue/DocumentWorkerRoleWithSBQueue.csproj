@@ -91,6 +91,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentManagementCommon\DocumentManagementCommon.csproj">
+      <Project>{12dc4c00-d716-46eb-bd39-85ae52c909ee}</Project>
+      <Name>DocumentManagementCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,5 +12,7 @@
         public const string PdfBlobContainerName = "Storage.PdfBlobContainerName";
         public const string StorageQueueContainerName = "Storage.StorageQueueContainerName";
         public const string StorageAccountConnectionName = "Storage.ConnectionString";
+        public const string ServiceBusConnectionString="Microsoft.ServiceBus.ConnectionString";
+        public const string ServiceBusQueueName = "demo-service-bus-queue";
     }
 }
