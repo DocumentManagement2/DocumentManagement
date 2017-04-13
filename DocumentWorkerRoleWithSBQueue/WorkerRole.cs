@@ -41,7 +41,7 @@ namespace DocumentWorkerRoleWithSBQueue
                         receivedMessage.Complete();
 
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         // Handle any message processing specific exceptions here
                     }
@@ -86,7 +86,7 @@ namespace DocumentWorkerRoleWithSBQueue
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
             CloudQueue queue = queueClient.GetQueueReference("errormessage");
             queue.CreateIfNotExists();
-            
+
             queue.AddMessage(new CloudQueueMessage(m));
         }
     }
