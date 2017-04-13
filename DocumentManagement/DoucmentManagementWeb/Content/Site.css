@@ -22,3 +22,22 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.document-catalog-item{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #bdbebd;
+    cursor: pointer;
+    padding: 20px 45px;
+    margin:20px;
+}
+
+.document-catalog-item .glyphicon{
+    font-size:100px;
+}
+
+.document-catalog-item p{
+    text-align: center;
+    margin-top: 5px;
+}

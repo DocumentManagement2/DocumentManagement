@@ -1,22 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DocumentManagementCommon;
+using DoucmentManagementWeb.Services;
 
 namespace DoucmentManagementWeb.Controllers
 {
     public class DocumentController : Controller
     {
-        public ActionResult DocumentList()
+        private readonly DocumentService documentService;
+
+        public DocumentController()
         {
-            return View(new List<DocumentInfo>());
+            documentService = DocumentService.Instance;
         }
 
-        public ActionResult AddDocument()
+        public async Task<ActionResult> DocumentList(string fileType)
+        {
+            return View(new List<DocumentInfo>(documentService.GetDocuments()));
+        }
+
+        public async Task<ActionResult> AddDocument()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddDocument(DocumentInfo document, HttpPostedFileBase importFile)
+        {
+            var tempBlobUri = await documentService.SaveDocumentFile(importFile).ConfigureAwait(false);
+            if (!string.IsNullOrWhiteSpace(tempBlobUri))
+            {
+                document.TempDocumentUrl = tempBlobUri;
+                await documentService.CreateDocumentIfNotExists(document).ConfigureAwait(false);
+                await documentService.SendQueueMessage(new DocumentBlobInfo() { BlobUri = new Uri(tempBlobUri), DocumentId = document.Id });
+            }
+
+            return RedirectToAction("DocumentList");
         }
     }
 }

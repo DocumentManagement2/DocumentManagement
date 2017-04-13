@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="DocumentManagement" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
   <WebRole name="DoucmentManagementWeb" vmsize="Small">
     <Sites>
@@ -10,6 +10,9 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="Microsoft.WindowsAzure.DocumentDB.Uri"/>
+      <Setting name="Microsoft.WindowsAzure.DocumentDB.PrivateKey"/>
+      <Setting name="Microsoft.WindowsAzure.AzureStorage.ConnectionString"/>
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />

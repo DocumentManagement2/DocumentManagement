@@ -4,18 +4,26 @@
 
 <div class="document-catalog">
     <div class="document-catalog-item">
-        <a title="Images">
+        <a title="Images" onclick="documentCatalogItemClick('Image');">
             <span class="glyphicon glyphicon-camera"></span>
+            <p>Images</p>
         </a>
     </div>
     <div class="document-catalog-item">
-        <a title="Excels">
+        <a title="Excels" onclick="documentCatalogItemClick('Excel');">
             <span class="glyphicon glyphicon-list-alt"></span>
+            <p>Excels</p>
         </a>
     </div>
     <div class="document-catalog-item">
-        <a title="PDFs">
+        <a title="PDFs" onclick="documentCatalogItemClick('PDF');">
             <span class="glyphicon glyphicon-book"></span>
+            <p>PDFs</p>
         </a>
     </div>
 </div>
+<script type="text/javascript">
+    function documentCatalogItemClick(fileType) {
+        document.location = '@Url.Action("DocumentList", "Document")?fileType=' + fileType;
+    }
+</script>
