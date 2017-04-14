@@ -45,6 +45,7 @@
       <Setting name="Storage.ExcelBlobContainerName" />
       <Setting name="Storage.PdfBlobContainerName" />
       <Setting name="Storage.StorageQueueContainerName" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="8080" />

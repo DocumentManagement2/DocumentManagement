@@ -1,6 +1,7 @@
 ﻿using documentManagementAdminWeb.Service;
 using DocumentManagementCommon;
 using DocumentManagementCommon.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace documentManagementAdminWeb.Controllers
                 };
                 blobService.MoveBlob(blobInfo);
                 //documentService.DeleteDocument(id).ConfigureAwait(true);
-                documentService.UpdateDocument(id); //Set document as approved
+                documentService.ApproveDocument(id); //Set document as approved
             }
 
 
@@ -45,7 +46,10 @@ namespace documentManagementAdminWeb.Controllers
             var doc = documentService.GetDocumentById(id);
             if (doc != null)
             {
-                //Update document status
+                documentService.RejectDocument(id);
+
+                string message= JsonConvert.SerializeObject(doc);
+                ServiceBusService.SendMessage(message);
             }
             return RedirectToAction("Index");
         }

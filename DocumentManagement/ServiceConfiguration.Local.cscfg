@@ -30,6 +30,7 @@
       <Setting name="Storage.ExcelBlobContainerName" value="demo-excels" />
       <Setting name="Storage.PdfBlobContainerName" value="demo-pdfs" />
       <Setting name="Storage.StorageQueueContainerName" value="demo-queue" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://demo-ns.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yxb/leN2W6kcp8vcqJEVz0imVPdrL9lGCAIWkQAwUI0=" />
     </ConfigurationSettings>
   </Role>
   <Role name="DocumentWorkerRoleWithSBQueue">

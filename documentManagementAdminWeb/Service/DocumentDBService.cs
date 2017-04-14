@@ -71,14 +71,22 @@ namespace DocumentManagementCommon.Services
             return documents.AsEnumerable().FirstOrDefault();
         }
 
+        public void ApproveDocument(string documentId)
+        {
+            UpdateDocument(documentId, DocumentStatus.Approved).Wait();
+        }
+        public void RejectDocument(string documentId)
+        {
+            UpdateDocument(documentId, DocumentStatus.Rejected).Wait();
+        }
 
-        public void UpdateDocument(string documentId)
+        public async Task UpdateDocument(string documentId, DocumentStatus status)
         {
             var doc = GetDocumentById(documentId);
-            doc.Status = DocumentStatus.Approved;
+            doc.Status = status;
             if (doc!=null)
             {
-                documentClient.ReplaceDocumentAsync(doc._self, doc).ConfigureAwait(true);
+                await documentClient.ReplaceDocumentAsync(doc._self, doc).ConfigureAwait(false);
             }
         }
 
