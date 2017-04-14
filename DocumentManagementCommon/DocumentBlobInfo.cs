@@ -21,6 +21,13 @@ namespace DocumentManagementCommon
                 return Path.GetFileNameWithoutExtension(BlobName);
             }
         }
+        public string FileExtension
+        {
+            get
+            {
+                return Path.GetExtension(BlobName);
+            }
+        }
         public string DocumentId { get; set; }
     }
 }

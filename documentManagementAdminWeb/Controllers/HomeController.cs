@@ -1,4 +1,7 @@
-﻿using System;
+﻿using documentManagementAdminWeb.Service;
+using DocumentManagementCommon;
+using DocumentManagementCommon.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +11,52 @@ namespace documentManagementAdminWeb.Controllers
 {
     public class HomeController : Controller
     {
+        private DocumentDBService documentService = DocumentDBService.Instance;
+        private StorageBlobService blobService = new StorageBlobService();
+
         public ActionResult Index()
         {
-            return View();
+            var result = documentService.GetUnApprovedDocuments();
+            
+            return View(result);
         }
 
-        public ActionResult About()
+        public ActionResult Approve(string id)
         {
-            ViewBag.Message = "Your application description page.";
+            var doc = documentService.GetDocumentById(id);
+            if (doc != null)
+            {
+                DocumentBlobInfo blobInfo = new DocumentBlobInfo
+                {
+                    BlobUri = new Uri(doc.TempDocumentUrl),
+                    DocumentId = id
+                };
+                blobService.MoveBlob(blobInfo);
+                //documentService.DeleteDocument(id).ConfigureAwait(true);
+                documentService.UpdateDocument(id); //Set document as approved
+            }
 
-            return View();
+
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Contact()
+        public ActionResult Reject(string id)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var doc = documentService.GetDocumentById(id);
+            if (doc != null)
+            {
+                //Update document status
+            }
+            return RedirectToAction("Index");
         }
+
+        //Get all blob info from document DB
+
+        //Find item in document DB by documentId, 
+        //Move blob from Temp container to new container by blob file type
+        //Remove blob file from temp container
+        //If move success, set status to Approved(1) in document DB
+        //If move failed, send message to service bus
+
     }
 }

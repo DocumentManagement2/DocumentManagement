@@ -21,5 +21,7 @@ namespace DocumentManagementCommon
         {
             return JsonConvert.SerializeObject(this);
         }
+        
+        public string _self { get; set; }
     }
 }
