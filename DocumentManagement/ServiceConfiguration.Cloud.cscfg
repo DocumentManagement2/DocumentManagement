@@ -14,7 +14,14 @@
       <Setting name="Storage.ExcelBlobContainerName" value="demo-excels" />
       <Setting name="Storage.PdfBlobContainerName" value="demo-pdfs" />
       <Setting name="Storage.StorageQueueContainerName" value="demo-queue" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="admin" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDcQu3DgT4uAQsoqeLISeNswDQYJKoZIhvcNAQEBBQAEggEAShhecf7HoFVwKR3CG/HUgTMqdpVgXXvpSVL7+eegxuV/sY40avvaLKkSUwKdZW8ymB6S7nHVmK8e9/km5Y9usHCZ+Ciua/XqkO6uyWbyPOT3uPLZZqrFC/08xyLqNpJbhIp+EewXo0zmh/xcIPVIiQPmNIiwoNOjUza5H74p3VfGKq5IORv3jcngFGcqo4jvbA08BKBLEsXqpgGMRyWZ6Vt/9GfK9/dBRfFISCRYxoYKr5199KdP9txebbPxt+U0eDnGDh4ipoOkTM1H7KbAXAc9XiY4b2VUgD9QQ3lAFJ0H9BUZFVnWGHYLiU6YCsxBIuAHeER9NU94gsZBRRScKzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECIbp1WJP0qV5gBCZKXA0uWNU/3BH6BA1QD58" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2018-04-17T23:59:59.0000000+08:00" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="F411D0065D8F885FE5A1E3918BF3D01B86CCA2E7" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
   <Role name="documentManagementAdminWeb">
     <Instances count="1" />
@@ -31,7 +38,14 @@
       <Setting name="Storage.PdfBlobContainerName" value="demo-pdfs" />
       <Setting name="Storage.StorageQueueContainerName" value="demo-queue" />
       <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://demo-ns.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yxb/leN2W6kcp8vcqJEVz0imVPdrL9lGCAIWkQAwUI0=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="admin" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDcQu3DgT4uAQsoqeLISeNswDQYJKoZIhvcNAQEBBQAEggEAShhecf7HoFVwKR3CG/HUgTMqdpVgXXvpSVL7+eegxuV/sY40avvaLKkSUwKdZW8ymB6S7nHVmK8e9/km5Y9usHCZ+Ciua/XqkO6uyWbyPOT3uPLZZqrFC/08xyLqNpJbhIp+EewXo0zmh/xcIPVIiQPmNIiwoNOjUza5H74p3VfGKq5IORv3jcngFGcqo4jvbA08BKBLEsXqpgGMRyWZ6Vt/9GfK9/dBRfFISCRYxoYKr5199KdP9txebbPxt+U0eDnGDh4ipoOkTM1H7KbAXAc9XiY4b2VUgD9QQ3lAFJ0H9BUZFVnWGHYLiU6YCsxBIuAHeER9NU94gsZBRRScKzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECIbp1WJP0qV5gBCZKXA0uWNU/3BH6BA1QD58" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2018-04-17T23:59:59.0000000+08:00" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="F411D0065D8F885FE5A1E3918BF3D01B86CCA2E7" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
   <Role name="DocumentWorkerRoleWithSBQueue">
     <Instances count="1" />
@@ -48,6 +62,14 @@
       <Setting name="Storage.ExcelBlobContainerName" value="demo-excels" />
       <Setting name="Storage.PdfBlobContainerName" value="demo-pdfs" />
       <Setting name="Storage.StorageQueueContainerName" value="demo-queue" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="admin" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDcQu3DgT4uAQsoqeLISeNswDQYJKoZIhvcNAQEBBQAEggEAShhecf7HoFVwKR3CG/HUgTMqdpVgXXvpSVL7+eegxuV/sY40avvaLKkSUwKdZW8ymB6S7nHVmK8e9/km5Y9usHCZ+Ciua/XqkO6uyWbyPOT3uPLZZqrFC/08xyLqNpJbhIp+EewXo0zmh/xcIPVIiQPmNIiwoNOjUza5H74p3VfGKq5IORv3jcngFGcqo4jvbA08BKBLEsXqpgGMRyWZ6Vt/9GfK9/dBRfFISCRYxoYKr5199KdP9txebbPxt+U0eDnGDh4ipoOkTM1H7KbAXAc9XiY4b2VUgD9QQ3lAFJ0H9BUZFVnWGHYLiU6YCsxBIuAHeER9NU94gsZBRRScKzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECIbp1WJP0qV5gBCZKXA0uWNU/3BH6BA1QD58" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2018-04-17T23:59:59.0000000+08:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="F411D0065D8F885FE5A1E3918BF3D01B86CCA2E7" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>

@@ -24,6 +24,9 @@
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="62347" />
     </Endpoints>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+    </Imports>
   </WebRole>
   <WebRole name="documentManagementAdminWeb" vmsize="Small">
     <Sites>
@@ -50,6 +53,9 @@
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="8080" />
     </Endpoints>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+    </Imports>
   </WebRole>
   <WorkerRole name="DocumentWorkerRoleWithSBQueue" vmsize="Small">
     <ConfigurationSettings>
@@ -66,5 +72,9 @@
       <Setting name="Storage.PdfBlobContainerName" />
       <Setting name="Storage.StorageQueueContainerName" />
     </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
   </WorkerRole>
 </ServiceDefinition>

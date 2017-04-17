@@ -14,5 +14,6 @@
         public const string StorageAccountConnectionName = "Storage.ConnectionString";
         public const string ServiceBusConnectionString="Microsoft.ServiceBus.ConnectionString";
         public const string ServiceBusQueueName = "demo-service-bus-queue";
+        public const string StorageErrorQueueName = "errormessage";
     }
 }

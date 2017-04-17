@@ -12,15 +12,29 @@ namespace DocumentManagementWebJob
 {
     public class Functions
     {
-        private const string queueName = AzureRelatedNames.ServiceBusQueueName;
+        private const string sbQueueName = AzureRelatedNames.ServiceBusQueueName;
+        private const string sQueueName = AzureRelatedNames.StorageErrorQueueName;
 
-        public static void SBQueue2SBQueue(
-      [ServiceBusTrigger(queueName)] string start,
-      [ServiceBus(queueName + "1")] out string message,
+        public static void SBQueue2SQueue(
+      [ServiceBusTrigger(sbQueueName)] string error,
+      [Queue(sQueueName)] out string message,
       TextWriter log)
         {
-            message = start + "-SBQueue2SBQueue";
-            log.WriteLine("SBQueue2SBQueue: " + message);
+            message = string.Empty;
+
+            var flag = SendEmail(error);
+            if (!flag)
+            {
+                message = error;
+            }
+
+            log.WriteLine("SBQueue2SQueue: " + message);
+        }
+
+        private static bool SendEmail(string error)
+        {
+            //Todo: send email
+            return false;
         }
     }
 }
