@@ -36,10 +36,10 @@ namespace DocumentWorkerRoleWithSBQueue
                     try
                     {
                         // Process the message
-                        Trace.WriteLine("Processing Service Bus message: " + receivedMessage.SequenceNumber.ToString());
-                        SendErrorMessage(receivedMessage);
+                        //Trace.WriteLine("Processing Service Bus message: " + receivedMessage.SequenceNumber.ToString());
+                        //SendErrorMessage(receivedMessage);
 
-                        receivedMessage.Complete();
+                        //receivedMessage.Complete();
 
                     }
                     catch (Exception ex)

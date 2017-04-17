@@ -27,6 +27,11 @@ namespace DocumentManagementWebJob
             };
             config.UseServiceBus(serviceBusConfig);
 
+            if (config.IsDevelopment)
+            {
+                config.UseDevelopmentSettings();
+            }
+
             JobHost host = new JobHost(config);
             host.RunAndBlock();
         }
